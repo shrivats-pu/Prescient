@@ -179,27 +179,35 @@ def sample_quotients(pre_sunrise_hrs, post_sunset_hrs, s_data, ns_data):
     return day_sample
 
 
-def apply_day_quotients(quotients, day, file_paths):
+def apply_day_quotients(quotients, day, file_paths, det_assets = []):
     # quotients: dataframe with all the quotients to apply
     # day: string version of what day to modify with the quotients in form YYYY-MM-DD
     # output: directly modify the time series files to apply the quotients
+    # deterministic assets: list that contains what assets to make deterministic. Default none.
 
     for path in file_paths:
         file_data = pd.read_csv(path)
-        count = 0 
         file_data = file_data.set_index('datetime')
         dts = pd.Series(pd.date_range(day, periods=24, freq='H'))
         t = dts.dt.strftime('%Y-%m-%d %H:%M:%S')
-        file_data.loc[t, 'actuals'] = file_data.loc[t, 'forecasts'] * quotients[path[24:-22] + "_quotient"].tolist()
+        if (not path in det_assets):
+                file_data.loc[t, 'actuals'] = file_data.loc[t, 'forecasts'] * quotients[path[24:-22] + "_quotient"].tolist()
+        else:
+                file_data.loc[t, 'actuals'] = file_data.loc[t, 'forecasts']
         file_data = file_data.truncate(before = '2020-07-09', after = '2020-07-12')
-
         file_data.to_csv(path, index=True)
 
 
+
 # run all the data perturbation functions as a function call -> should be in working directory when called and will remain.
-def perturb_data(file_paths, solar_path, no_solar_path):
+def perturb_data(file_paths, solar_path, no_solar_path, deterministic_assets = []):
+        # file_paths: the paths of all time series data files to apply data changes to
+        # solar_path: the path of the solar quotients saved as CSV file
+        # no_solar_path: the path of no solar quotients saved as a CSV file
+        # deterministic_assets: a list of assets that should be considered deterministic i.e. Actuals = Forecasts
         path = os.getcwd()
         os.chdir("..")
+        #print(path) # print out as a test
         save_quotients(file_paths, solar_path, no_solar_path)
         solar_data_1 = pd.read_csv(solar_path)
         no_solar_data_1 = pd.read_csv(no_solar_path)
@@ -211,9 +219,9 @@ def perturb_data(file_paths, solar_path, no_solar_path):
 
         # need to apply the quotients to the proper forecasts and write to file in the format that is readable to prescient
         # only need to write 1 day on either end of July 10 for now.
-        apply_day_quotients(quotients_0709_1, "2020-07-09", file_paths)
-        apply_day_quotients(quotients_0710_1, "2020-07-10", file_paths)
-        apply_day_quotients(quotients_0711_1, "2020-07-11", file_paths)
+        apply_day_quotients(quotients_0709_1, "2020-07-09", file_paths, det_assets = deterministic_assets)
+        apply_day_quotients(quotients_0710_1, "2020-07-10", file_paths, det_assets = deterministic_assets)
+        apply_day_quotients(quotients_0711_1, "2020-07-11", file_paths, det_assets = deterministic_assets)
 
 # should be in directory "/downloads" when called and will stay at that directory
 def save_quotients(file_paths, solar_path, no_solar_path):
@@ -255,7 +263,7 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         with open(populate, "w") as file:
                 for line in lines:
                         if (line.startswith("--end-date")):
-                                file.write("--end-date 2020-07-11")
+                                file.write("--end-date 2020-07-11 \n")
                         else:
                                 file.write(line)
         
