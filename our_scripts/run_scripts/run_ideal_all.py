@@ -11,7 +11,7 @@ import pandas as pd
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
-runs = 1
+runs = 25
 
 deterministic_assets = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv']
 
@@ -19,7 +19,7 @@ def run(i, det_assets):
         rh.copy_directory(i, path_template)
         os.chdir(path_template+str(i))
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, deterministic_assets=det_assets)
-        rh.run_prescient(i, False)
+        rh.run_prescient(i, True)
         os.chdir("..")
 
 def CVaR(lst, alpha, upper_tail = True):
