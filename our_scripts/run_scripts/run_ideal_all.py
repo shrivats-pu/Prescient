@@ -46,7 +46,6 @@ for asset in rh.file_paths_combined:
         path_template = "id_" + asset[24:-4] + "_"
         for j in range(runs):
                 run(j, [asset])
-        break
 
 all_files = os.listdir()
 
