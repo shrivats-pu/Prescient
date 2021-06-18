@@ -7,13 +7,14 @@ import os
 import run_helpers as rh
 import numpy as np
 import pandas as pd
+import sys
 
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
 runs = 25
 
-deterministic_assets = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv']
+deterministic_assets = sys.argv[1]
 
 def run(i, det_assets):
         rh.copy_directory(i, path_template)
@@ -42,13 +43,12 @@ os.chdir("..")
 os.chdir("./downloads")
 
 
-for asset in rh.file_paths_combined:
-        path_template = "id_" + asset[24:-4] + "_"
-        for j in range(runs):
-                run(j, [asset])
+path_template = "id_" + deterministic_assets[24:-4] + "_"
+for j in range(runs):
+        run(j, [deterministic_assets])
 
 all_files = os.listdir()
-
+"""
 dictionary = {}
 for dir in all_files:
         if (dir.startswith("id_")):
@@ -65,3 +65,4 @@ for val in dictionary:
 df = pd.DataFrame(CVaRs)
 
 df.to_csv("./CVaRs.csv")
+"""

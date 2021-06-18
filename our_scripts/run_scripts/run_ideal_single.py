@@ -5,13 +5,15 @@
 
 import os
 import run_helpers as rh
+import sys
 
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
 runs = 1
 
-deterministic_assets = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv']
+deterministic_assets = [sys.argv[1]]
+print(deterministic_assets)
 
 def run(i):
         rh.copy_directory(i, path_template)
