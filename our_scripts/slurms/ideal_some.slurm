@@ -14,6 +14,6 @@ module purge
 module load anaconda3/2020.11
 module load gurobi
 conda activate prescient_env
-cd /tigress/ereese/some/Prescient/our_scripts/run_scripts
+cd /tigress/ereese/some/Prescient/our_scripts
 
 python run_ideal_some.py
