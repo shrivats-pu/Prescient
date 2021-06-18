@@ -280,7 +280,7 @@ def modify_file(path):
 
 
 def copy_directory(index, path_template):
-    new_path = path_template + str(index)
+    new_path = path_template + '%03d'%index
     if os.path.exists(new_path):
         shutil.rmtree(new_path)
         shutil.copytree(dir_path, new_path)
