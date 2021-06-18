@@ -8,12 +8,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 
-os.chdir("..")
-os.chdir("./collated_outputs")
-
-data = pd.read_csv("collated_output_2.csv")
-baseline = pd.read_csv("collated_output_baseline.csv", index_col=0)
-
 
 def average_runs(df):
     return df.mean()
@@ -66,9 +60,16 @@ def CVaR(lst, alpha, upper_tail = True):
         idx = np.where(ecdf >= alpha)[0][0]
         return np.mean(lst[0:idx+1])
 
+# formed as a function to support imports
+def run():
+        os.chdir("..")
+        os.chdir("./collated_outputs")
 
-baseline_avg = average_runs(baseline)
-print(VaR(data['Total costs'] - baseline_avg['Total costs'], 0.05, True))
-produce_hist(data['Total costs'] - baseline_avg['Total costs'], 'Total costs')
+        data = pd.read_csv("collated_output_2.csv")
+        baseline = pd.read_csv("collated_output_baseline.csv", index_col=0)
+
+        baseline_avg = average_runs(baseline)
+        print(VaR(data['Total costs'] - baseline_avg['Total costs'], 0.05, True))
+        produce_hist(data['Total costs'] - baseline_avg['Total costs'], 'Total costs')
 
 

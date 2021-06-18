@@ -19,3 +19,5 @@ tests/simulator_tests/test_cases/deterministic_with_network_simulation_output/
 tests/simulator_tests/test_cases/deterministic_simulation_output/
 our_scripts/run_scripts/.DS_Store
 .DS_Store
+our_scripts/__init__.py
+our_scripts/output_analysis/__init__.py

@@ -4,7 +4,7 @@
 # Created: June 16, 2021
 
 import os
-import run_helpers as rh
+import run_scripts.run_helpers as rh
 import sys
 
 path_template = "./scenario_ideal_"
@@ -23,7 +23,6 @@ def run(i):
         os.chdir("..")
 
 # program body
-os.chdir("..")
 os.chdir("..")
 os.chdir("./downloads")
 
