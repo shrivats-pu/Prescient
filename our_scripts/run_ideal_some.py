@@ -19,7 +19,7 @@ runs = 100
 
 def run(i, det_assets):
         rh.copy_directory(i, path_template)
-        os.chdir(path_template+str(i))
+        os.chdir(path_template+'%03d'%index)
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, deterministic_assets=det_assets)
         rh.run_prescient(i, True)
         os.chdir("..")
