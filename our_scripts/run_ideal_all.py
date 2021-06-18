@@ -93,8 +93,9 @@ for dir in all_files:
                 dictionary.setdefault(dir[4:-2], [])
                 output_data = pd.read_csv("./"+dir+"/output/overall_simulation_output.csv")
                 dictionary[dir[4:-2]].append(output_data)
-
-table = pd.read_csv('./collated_outputs/collated_output_baseline.csv')
+os.chdir("..")
+os.chdir("./our_scripts/collated_outputs")
+table = pd.read_csv('./collated_output_baseline.csv')
 baseline = table['Total costs'].mean()
 dct = {}
 dct['asset'] = []
