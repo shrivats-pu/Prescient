@@ -40,6 +40,6 @@ assets = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv','./timeseries
 
 
 for deterministic_assets in assets:
-        path_template = "id_" + deterministic_assets[24:-5] + "_"
+        path_template = "id_" + deterministic_assets[24:-4] + "_"
         for j in range(runs):
                 run(j, [deterministic_assets])
