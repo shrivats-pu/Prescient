@@ -14,7 +14,7 @@ module purge
 module load anaconda3/2020.11
 module load gurobi
 conda activate prescient_env
-cd /tigress/ereese/some/Prescient/our_scripts
+cd /tigress/ereese/drop_some/Prescient/our_scripts
 
 python run_drop_some.py
 python extract.py
