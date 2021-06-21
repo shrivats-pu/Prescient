@@ -26,7 +26,7 @@ for dir in scenarios:
 output = pd.concat(frame_list, ignore_index=True)
 os.chdir("..")
 
-path = "./collated_output_"
+path = "our_scripts/collated_outputs/collated_output_"
 ind = 1
 while(os.path.exists(path+str(ind)+".csv")):
     ind += 1
