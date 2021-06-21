@@ -33,10 +33,11 @@ def output_summary():
         dct['quartile_3'] = []
         dct['max'] = []
         dct['min'] = []
+        if not os.path.exists('outputs'):
+                os.makedirs('outputs')
 
         for val in dictionary:
                 output = pd.concat(dictionary[val], ignore_index = True)
-                # TODO: Add the functionality to make the subfolder if it doesn't already exist
                 output.to_csv("./outputs/collated_"+val+".csv")
                 dct['asset'].append(val)
                 dct['mean'].append(output['Total costs'].mean())
