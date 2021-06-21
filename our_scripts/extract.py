@@ -1,4 +1,7 @@
-# extract.py: extracts data from runs and computes summary statistics
+# extract.py: extracts data from runs and computes summary statistics into folder output in collated_outputs folder. Summary in summary.csv
+# requirements: have already run iterations of prescient and saved the files to download folder, starting with prefix compilation_prefix
+# intended system: Tiger or local
+# dependencies: analyze_prescient_output
 # created by: Ethan Reese
 # email: ereese@princeton.edu
 # date: June 21, 2021
@@ -6,6 +9,8 @@ import os
 import pandas as pd
 from output_analysis.analyze_prescient_output import CVaR
 import numpy as np
+
+compilation_prefix = "scen"
 
 def output_summary():
         os.chdir("..")

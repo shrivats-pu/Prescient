@@ -1,4 +1,7 @@
-# run_ideal_all.py: run scenarios for each asset where all assets except for it are deterministic
+# run_ideal_all.py: run scenarios for zone 1 solar assets where everything is stochastic except each asset.
+# requirements: proper install of Prescient and download of rts-gmlc data. saves outputs in non-collated form in downloads folder.
+# intended system: Tiger
+# dependencies: run_helpers.py
 # author: Ethan Reese
 # email: ereese@princeton.edu
 # Created: June 16, 2021
