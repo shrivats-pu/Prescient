@@ -7,33 +7,34 @@ import pandas as pd
 from output_analysis.analyze_prescient_output import CVaR
 import numpy as np
 
-os.chdir("..")
-os.chdir("./downloads")
+def output_summary():
+        os.chdir("..")
+        os.chdir("./downloads")
 
 
-all_files = os.listdir()
+        all_files = os.listdir()
 
-dictionary = {}
-for dir in all_files:
+        dictionary = {}
+        for dir in all_files:
         if (dir.startswith("id_") and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
-                dictionary.setdefault(dir[3:-2], [])
+                dictionary.setdefault(dir[3:-3], [])
                 output_data = pd.read_csv("./"+dir+"/output/overall_simulation_output.csv")
-                dictionary[dir[3:-2]].append(output_data)
-os.chdir("..")
-os.chdir("./our_scripts/collated_outputs")
-table = pd.read_csv('./all_stochastic_test.csv')
-baseline = table['Total costs']
-dct = {}
-dct['asset'] = []
-dct['CVaR 0.05'] = []
-dct['CVaR 0.01'] = []
-dct['mean'] = []
-dct['quartile_1'] = []
-dct['quartile_3'] = []
-dct['max'] = []
-dct['min'] = []
+                dictionary[dir[3:-3]].append(output_data)
+        os.chdir("..")
+        os.chdir("./our_scripts/collated_outputs")
+        table = pd.read_csv('./all_stochastic_test.csv')
+        baseline = table['Total costs']
+        dct = {}
+        dct['asset'] = []
+        dct['CVaR 0.05'] = []
+        dct['CVaR 0.01'] = []
+        dct['mean'] = []
+        dct['quartile_1'] = []
+        dct['quartile_3'] = []
+        dct['max'] = []
+        dct['min'] = []
 
-for val in dictionary:
+        for val in dictionary:
         output = pd.concat(dictionary[val], ignore_index = True)
         # TODO: Add the functionality to make the subfolder if it doesn't already exist
         if not os.path.exists('./outputs'):
@@ -47,6 +48,8 @@ for val in dictionary:
         dct['min'].append(output['Total costs'].min()) 
         dct['CVaR 0.01'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
         dct['CVaR 0.05'].append(CVaR(output['Total costs'], 0.05) - CVaR(baseline, 0.05))
-df = pd.DataFrame(dct)
+        df = pd.DataFrame(dct)
 
-df.to_csv("./summary.csv")
+        df.to_csv("./summary.csv")
+
+output_summary()
