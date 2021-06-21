@@ -41,7 +41,8 @@ for val in dictionary:
         dct['quartile_3'].append(output['Total costs'].quantile(0.75))
         dct['max'].append(output['Total costs'].max())
         dct['min'].append(output['Total costs'].min()) 
-        dct['CVaR'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
+        dct['CVaR 0.01'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
+        dct['CVaR 0.05'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
 df = pd.DataFrame(dct)
 
 df.to_csv("./summary.csv")
