@@ -9,6 +9,7 @@ import numpy as np
 import pandas as pd
 import sys
 from output_analysis.analyze_prescient_output import CVaR
+import extract
 
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
@@ -78,6 +79,6 @@ assets = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv','./timeseries
 
 
 for deterministic_assets in assets:
-        path_template = "id_" + deterministic_assets[24:-5] + "_"
+        path_template = "id_" + deterministic_assets[24:-4] + "_"
         for j in range(runs):
                 run(j, [deterministic_assets])
