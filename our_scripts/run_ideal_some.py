@@ -8,7 +8,6 @@ import run_scripts.run_helpers as rh
 import numpy as np
 import pandas as pd
 import sys
-from extract import output_summary
 
 
 path_template = "./scenario_ideal_"
@@ -45,5 +44,3 @@ for deterministic_assets in assets:
         for j in range(runs):
                 run(j, [deterministic_assets])
 
-
-output_summary()

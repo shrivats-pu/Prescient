@@ -9,7 +9,6 @@ import numpy as np
 import pandas as pd
 import sys
 from output_analysis.analyze_prescient_output import CVaR
-from extract import output_summary
 
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
