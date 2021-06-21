@@ -44,7 +44,7 @@ for val in dictionary:
         dct['max'].append(output['Total costs'].max())
         dct['min'].append(output['Total costs'].min()) 
         dct['CVaR 0.01'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
-        dct['CVaR 0.05'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
+        dct['CVaR 0.05'].append(CVaR(output['Total costs'], 0.05) - CVaR(baseline, 0.05))
 df = pd.DataFrame(dct)
 
 df.to_csv("./summary.csv")
