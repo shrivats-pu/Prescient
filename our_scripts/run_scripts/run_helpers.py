@@ -179,7 +179,7 @@ def sample_quotients(pre_sunrise_hrs, post_sunset_hrs, s_data, ns_data):
     return day_sample
 
 
-def apply_day_quotients(quotients, day, file_paths, det_assets = []):
+def apply_day_quotients(quotients, day, file_paths, det_assets = [], drop_assets = []):
     # quotients: dataframe with all the quotients to apply
     # day: string version of what day to modify with the quotients in form YYYY-MM-DD
     # output: directly modify the time series files to apply the quotients
@@ -190,21 +190,25 @@ def apply_day_quotients(quotients, day, file_paths, det_assets = []):
         file_data = file_data.set_index('datetime')
         dts = pd.Series(pd.date_range(day, periods=24, freq='H'))
         t = dts.dt.strftime('%Y-%m-%d %H:%M:%S')
-        if (not path in det_assets):
+        if (not path in det_assets and not path in drop_assets):
                 file_data.loc[t, 'actuals'] = file_data.loc[t, 'forecasts'] * quotients[path[24:-22] + "_quotient"].tolist()
-        else:
+        elif (not path in drop_assets):
                 file_data.loc[t, 'actuals'] = file_data.loc[t, 'forecasts']
+        else:
+                file_data.loc[t, 'actuals'] = 0
+                file_data.loc[t, 'forecasts'] = 0
         file_data = file_data.truncate(before = '2020-07-09', after = '2020-07-12')
         file_data.to_csv(path, index=True)
 
 
 
 # run all the data perturbation functions as a function call -> should be in working directory when called and will remain.
-def perturb_data(file_paths, solar_path, no_solar_path, deterministic_assets = []):
+def perturb_data(file_paths, solar_path, no_solar_path, deterministic_assets = [], dropped_assets = []):
         # file_paths: the paths of all time series data files to apply data changes to
         # solar_path: the path of the solar quotients saved as CSV file
         # no_solar_path: the path of no solar quotients saved as a CSV file
         # deterministic_assets: a list of assets that should be considered deterministic i.e. Actuals = Forecasts
+        # dropped_assets: list of assets that have their file deleted
         path = os.getcwd()
         os.chdir("..")
         #print(path) # print out as a test
@@ -219,9 +223,9 @@ def perturb_data(file_paths, solar_path, no_solar_path, deterministic_assets = [
 
         # need to apply the quotients to the proper forecasts and write to file in the format that is readable to prescient
         # only need to write 1 day on either end of July 10 for now.
-        apply_day_quotients(quotients_0709_1, "2020-07-09", file_paths, det_assets = deterministic_assets)
-        apply_day_quotients(quotients_0710_1, "2020-07-10", file_paths, det_assets = deterministic_assets)
-        apply_day_quotients(quotients_0711_1, "2020-07-11", file_paths, det_assets = deterministic_assets)
+        apply_day_quotients(quotients_0709_1, "2020-07-09", file_paths, det_assets = deterministic_assets, drop_assets = dropped_assets)
+        apply_day_quotients(quotients_0710_1, "2020-07-10", file_paths, det_assets = deterministic_assets, drop_assets = dropped_assets)
+        apply_day_quotients(quotients_0711_1, "2020-07-11", file_paths, det_assets = deterministic_assets, drop_assets = dropped_assets)
 
 # should be in directory "/downloads" when called and will stay at that directory
 def save_quotients(file_paths, solar_path, no_solar_path):

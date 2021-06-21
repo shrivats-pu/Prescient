@@ -8,7 +8,8 @@ import run_scripts.run_helpers as rh
 import numpy as np
 import pandas as pd
 import sys
-from output_analysis.analyze_prescient_output import CVaR
+from extract import output_summary
+
 
 path_template = "./scenario_ideal_"
 solar_path = "./solar_quotients.csv"
@@ -43,3 +44,6 @@ for deterministic_assets in assets:
         path_template = "id_" + deterministic_assets[24:-4] + "_"
         for j in range(runs):
                 run(j, [deterministic_assets])
+
+
+output_summary()
