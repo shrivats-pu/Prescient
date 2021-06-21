@@ -25,12 +25,14 @@ table = pd.read_csv('./all_stochastic_test.csv')
 baseline = table['Total costs']
 dct = {}
 dct['asset'] = []
-dct['CVaR'] = []
+dct['CVaR 0.05'] = []
+dct['CVaR 0.01'] = []
 dct['mean'] = []
 dct['quartile_1'] = []
 dct['quartile_3'] = []
 dct['max'] = []
 dct['min'] = []
+
 for val in dictionary:
         output = pd.concat(dictionary[val], ignore_index = True)
         # TODO: Add the functionality to make the subfolder if it doesn't already exist
