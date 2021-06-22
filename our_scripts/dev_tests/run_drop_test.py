@@ -1,10 +1,13 @@
-# run_drop_single.py: run scenarios where one asset is dropped out and the rest are stochatic
+# run_drop_test.py: run scenarios where one asset is dropped out and the rest are stochatic
+# intended system: local
 # author: Ethan Reese
 # email: ereese@princeton.edu
 # Created: June 16, 2021
 
 import os
-import run_scripts.run_helpers as rh
+os.chdir("..")
+
+import prescient_helpers.run_helpers as rh
 import sys
 
 path_template = "./scenario_dropped_"

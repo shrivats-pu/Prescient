@@ -4,7 +4,7 @@
 # created: June 14, 2021
 
 import os
-import run_helpers as rh
+import prescient_helpers.run_helpers as rh
 
 path_template = "./scenario_"
 solar_path = "./solar_quotients.csv"

@@ -1,13 +1,19 @@
-# extract.py: extracts data from runs and computes summary statistics
+# extract.py: extracts data from runs and computes summary statistics into folder output in collated_outputs folder. Summary in summary.csv
+# requirements: have already run iterations of prescient and saved the files to download folder, starting with prefix compilation_prefix
+# intended system: Tiger or local
+# dependencies: analyze_prescient_output
 # created by: Ethan Reese
 # email: ereese@princeton.edu
 # date: June 21, 2021
+
 import os
 import pandas as pd
-from output_analysis.analyze_prescient_output import CVaR
+from prescient_helpers.analyze_prescient_output import CVaR
 import numpy as np
 
-def output_summary():
+
+
+def output_summary(compilation_prefix = "scen"):
         os.chdir("..")
         os.chdir("./downloads")
 
@@ -16,7 +22,7 @@ def output_summary():
 
         dictionary = {}
         for dir in all_files:
-                if (dir.startswith("id_") and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
+                if (dir.startswith(compilation_prefix) and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
                         dictionary.setdefault(dir[3:-3], [])
                         output_data = pd.read_csv("./"+dir+"/output/overall_simulation_output.csv")
                         dictionary[dir[3:-3]].append(output_data)
@@ -33,10 +39,11 @@ def output_summary():
         dct['quartile_3'] = []
         dct['max'] = []
         dct['min'] = []
+        if not os.path.exists('outputs'):
+                os.makedirs('outputs')
 
         for val in dictionary:
                 output = pd.concat(dictionary[val], ignore_index = True)
-                # TODO: Add the functionality to make the subfolder if it doesn't already exist
                 output.to_csv("./outputs/collated_"+val+".csv")
                 dct['asset'].append(val)
                 dct['mean'].append(output['Total costs'].mean())
@@ -49,5 +56,3 @@ def output_summary():
                 df = pd.DataFrame(dct)
 
                 df.to_csv("./summary.csv")
-
-output_summary()

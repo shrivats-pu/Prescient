@@ -1,10 +1,13 @@
-# run_ideal_all.py: run scenarios for each asset where it is dropped out
+# run_ideal_all.py: run scenarios for each asset where it is dropped out but all other assets are normal
+# requirements: properly configured prescient install and rts-gmlc download. Can analyze its output with extract.py
+# Indended System: Tiger
+# dependencies: run_helpers.py
 # author: Ethan Reese
 # email: ereese@princeton.edu
 # Created: June 21, 2021
 
 import os
-import run_scripts.run_helpers as rh
+import prescient_helpers.run_helpers as rh
 import numpy as np
 import pandas as pd
 import sys
@@ -34,6 +37,7 @@ def run(i, det_assets):
         os.chdir("..")
 
 # program body
+os.chdir("..")
 os.chdir("..")
 os.chdir("./downloads")
 

@@ -1,10 +1,12 @@
-# run_ideal_single.py: run scenarios where all assets except for one are deterministic
+# run_ideal_single.py: run scenarios where all assets except for one are deterministic. For testing purposes
+# intended system: local
 # author: Ethan Reese
 # email: ereese@princeton.edu
 # Created: June 16, 2021
 
 import os
-import run_scripts.run_helpers as rh
+os.chdir("..")
+import prescient_helpers.run_helpers as rh
 import sys
 
 path_template = "./scenario_ideal_"
