@@ -7,7 +7,7 @@
 import os
 os.chdir("..")
 
-import run_scripts.run_helpers as rh
+import prescient_helpers.run_helpers as rh
 import sys
 
 path_template = "./scenario_dropped_"

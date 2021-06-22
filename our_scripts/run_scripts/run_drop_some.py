@@ -7,7 +7,7 @@
 # Created: June 21, 2021
 
 import os
-import run_scripts.run_helpers as rh
+import prescient_helpers.run_helpers as rh
 import numpy as np
 import pandas as pd
 import sys
@@ -37,6 +37,7 @@ def run(i, det_assets):
         os.chdir("..")
 
 # program body
+os.chdir("..")
 os.chdir("..")
 os.chdir("./downloads")
 

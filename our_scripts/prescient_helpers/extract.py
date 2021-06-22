@@ -5,14 +5,15 @@
 # created by: Ethan Reese
 # email: ereese@princeton.edu
 # date: June 21, 2021
+
 import os
 import pandas as pd
-from output_analysis.analyze_prescient_output import CVaR
+from prescient_helpers.analyze_prescient_output import CVaR
 import numpy as np
 
-compilation_prefix = "scen"
 
-def output_summary():
+
+def output_summary(compilation_prefix = "scen"):
         os.chdir("..")
         os.chdir("./downloads")
 
@@ -21,7 +22,7 @@ def output_summary():
 
         dictionary = {}
         for dir in all_files:
-                if (dir.startswith("id_") and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
+                if (dir.startswith(compilation_prefix) and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
                         dictionary.setdefault(dir[3:-3], [])
                         output_data = pd.read_csv("./"+dir+"/output/overall_simulation_output.csv")
                         dictionary[dir[3:-3]].append(output_data)
@@ -55,5 +56,3 @@ def output_summary():
                 df = pd.DataFrame(dct)
 
                 df.to_csv("./summary.csv")
-
-output_summary()
