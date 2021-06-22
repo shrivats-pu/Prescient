@@ -10,17 +10,18 @@ os.chdir("..")
 import run_scripts.run_helpers as rh
 import sys
 
-path_template = "./scenario_ideal_"
+
 solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
 runs = 1
 
 deterministic_assets = [sys.argv[1]]
 print(deterministic_assets)
+path_template = "./scenario_ideal_" + deterministic_assets[0][24:31] + "_"
 
 def run(i):
         rh.copy_directory(i, path_template)
-        os.chdir(path_template+str(i))
+        os.chdir(path_template+'%03d'%i)
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, deterministic_assets=deterministic_assets)
         rh.run_prescient(i, True)
         os.chdir("..")
