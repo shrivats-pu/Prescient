@@ -26,6 +26,7 @@ def run(i):
         os.chdir("..")
 
 # program body
+print(os.getcwd())
 os.chdir("..")
 os.chdir("./downloads")
 
