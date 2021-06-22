@@ -17,7 +17,7 @@ runs = 1
 
 deterministic_assets = [sys.argv[1]]
 print(deterministic_assets)
-path_template = "./scenario_ideal_" + deterministic_assets[0][24:31] + "_"
+path_template = "./scenario_ideal_" + deterministic_assets[0][24:32] + "_"
 
 def run(i):
         rh.copy_directory(i, path_template)
