@@ -18,5 +18,7 @@ cd /tigress/ereese/test_para/Prescient/our_scripts
 
 srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_1_forecasts_actuals.csv &
 srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_2_forecasts_actuals.csv &
+srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_3_forecasts_actuals.csv &
+srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_4_forecasts_actuals.csv &
 wait
 
