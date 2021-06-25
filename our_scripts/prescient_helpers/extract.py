@@ -51,8 +51,8 @@ def output_summary(compilation_prefix = "scen"):
                 dct['quartile_3'].append(output['Total costs'].quantile(0.75))
                 dct['max'].append(output['Total costs'].max())
                 dct['min'].append(output['Total costs'].min()) 
-                dct['CVaR 0.01'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
-                dct['CVaR 0.05'].append(CVaR(output['Total costs'], 0.05) - CVaR(baseline, 0.05))
+                dct['CVaR 0.01 Differential'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
+                dct['CVaR 0.05 Differential'].append(CVaR(output['Total costs'], 0.05) - CVaR(baseline, 0.05))
                 df = pd.DataFrame(dct)
 
                 df.to_csv("./summary.csv")
