@@ -13,7 +13,7 @@ module purge
 module load anaconda3/2020.11
 module load gurobi
 conda activate prescient_env
-cd /scratch/gpfs/ereese/big_run_ideal/Prescient/our_scripts/parallel_versions
+cd /scratch/gpfs/ereese/second_test/Prescient/our_scripts/parallel_versions
 srun --exclusive -N 1 -n 1 python parallel_ideal.py ./timeseries_data_files/101_PV_1_forecasts_actuals.csv &
 srun --exclusive -N 1 -n 1 python parallel_ideal.py ./timeseries_data_files/101_PV_2_forecasts_actuals.csv &
 srun --exclusive -N 1 -n 1 python parallel_ideal.py ./timeseries_data_files/101_PV_3_forecasts_actuals.csv &
