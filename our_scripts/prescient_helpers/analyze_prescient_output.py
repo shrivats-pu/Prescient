@@ -13,9 +13,9 @@ def average_runs(df):
     return df.mean()
 
 
-def produce_hist(lst, desc, plot_var=True):
+def produce_hist(lst, desc, bin_num, plot_var=True):
     plt.figure()
-    plt.hist(lst, bins=math.floor(len(lst)/20))
+    plt.hist(lst, bins=bin_num)
     plt.xlabel(desc)
     plt.ylabel("Frequency")
     plt.title("Histogram of " + desc + " over Fictitious Scenarios")
