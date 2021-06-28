@@ -176,6 +176,7 @@ def sample_quotients(pre_sunrise_hrs, post_sunset_hrs, s_data, ns_data):
     daylight_sample = s_quotients.sample(24 - pre_sunrise_hrs - post_sunset_hrs, replace=True)
     frames = [pre_sunrise_sample, daylight_sample, post_sunset_sample]
     day_sample = pd.concat(frames)
+    day_sample.to_csv("./quotients.csv")
     return day_sample
 
 
@@ -274,6 +275,9 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         runner.run(populate)
         runner.run(simulate)
         shutil.rmtree("./RTS-GMLC")
+        shutil.rmtree("./deterministic_with_network_scenarios")
+        shutil.rmtree("./timeseries_data_files")
+        shutil.rmtree("./templates")
 
 
 def modify_file(path):
