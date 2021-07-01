@@ -32,7 +32,9 @@ def output_summary(compilation_prefix = "scen"):
         baseline = table['Total costs']
         dct = {}
         dct['asset'] = []
-        dct['CVaR 0.05 Differential'] = []
+        
+        for i in np.linspace(0.05, 1, 20):
+                dct['CVaR ' + i + ' Differential'] = []
         dct['CVaR 0.01 Differential'] = []
         dct['mean'] = []
         dct['quartile_1'] = []
@@ -52,7 +54,8 @@ def output_summary(compilation_prefix = "scen"):
                 dct['max'].append(output['Total costs'].max())
                 dct['min'].append(output['Total costs'].min()) 
                 dct['CVaR 0.01 Differential'].append(CVaR(output['Total costs'], 0.01) - CVaR(baseline, 0.01))
-                dct['CVaR 0.05 Differential'].append(CVaR(output['Total costs'], 0.05) - CVaR(baseline, 0.05))
+                for i in np.linspace(0.05, 1, 20):
+                        dct['CVaR ' + i + ' Differential'].append(CVaR(output['Total costs'], i) - CVaR(baseline, i))
                 df = pd.DataFrame(dct)
 
                 df.to_csv("./summary.csv")
