@@ -17,11 +17,11 @@ module load gurobi
 conda activate prescient_env
 cd /tigress/ereese/test_para/Prescient/our_scripts
 
-arg = ()
-arg += (./timeseries_data_files/101_PV_1_forecasts_actuals.csv)
-arg += (./timeseries_data_files/101_PV_2_forecasts_actuals.csv)
-arg += (./timeseries_data_files/101_PV_3_forecasts_actuals.csv)
-arg += (./timeseries_data_files/101_PV_4_forecasts_actuals.csv)
+arg=()
+arg+=(./timeseries_data_files/101_PV_1_forecasts_actuals.csv)
+arg+=(./timeseries_data_files/101_PV_2_forecasts_actuals.csv)
+arg+=(./timeseries_data_files/101_PV_3_forecasts_actuals.csv)
+arg+=(./timeseries_data_files/101_PV_4_forecasts_actuals.csv)
 
 
 
