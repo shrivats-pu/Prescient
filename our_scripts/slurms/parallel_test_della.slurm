@@ -5,6 +5,7 @@
 #SBATCH --cpus-per-task=1        # cpu-cores per task (>1 if multi-threaded tasks)
 #SBATCH --mem-per-cpu=4G         # memory per cpu-core (4G is default)
 #SBATCH --time=1:00:00          # total run time limit (HH:MM:SS)
+#SBATCH --array=0-3 .            # sets up the job array
 #SBATCH --mail-type=begin        # send email when job begins
 #SBATCH --mail-type=end          # send email when job ends
 #SBATCH --mail-type=fail         # send email if job fails
@@ -16,9 +17,13 @@ module load gurobi
 conda activate prescient_env
 cd /tigress/ereese/test_para/Prescient/our_scripts
 
-srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_1_forecasts_actuals.csv &
-srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_2_forecasts_actuals.csv &
-srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_3_forecasts_actuals.csv &
-srun --exclusive -N 1 -n 1 python parallel_test_single.py ./timeseries_data_files/101_PV_4_forecasts_actuals.csv &
-wait
+arg = ()
+arg += (./timeseries_data_files/101_PV_1_forecasts_actuals.csv)
+arg += (./timeseries_data_files/101_PV_2_forecasts_actuals.csv)
+arg += (./timeseries_data_files/101_PV_3_forecasts_actuals.csv)
+arg += (./timeseries_data_files/101_PV_4_forecasts_actuals.csv)
+
+
+
+srun -N 1 -n 1 python parallel_test_single.py  ${arg[$SLURM_ARRAY_TASK_ID]}
 
