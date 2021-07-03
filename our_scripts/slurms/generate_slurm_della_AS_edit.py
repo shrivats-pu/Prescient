@@ -98,7 +98,7 @@ assets_all = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv',
 print(len(assets_all))
 assets_arvind = assets_all[0:math.floor(len(assets_all)/2)]
 assets_ethan = assets_all[math.floor(len(assets_all)/2):]
-print(len(assets_arvind))
+print(len(assets_ethan))
 preface = ["#!/bin/bash\n",
 "#SBATCH --job-name=parallel_drop    # create a short name for your job \n",
 "#SBATCH --nodes=1                # node count\n",
@@ -110,7 +110,7 @@ preface = ["#!/bin/bash\n",
 "#SBATCH --mail-type=begin        # send email when job begins\n",
 "#SBATCH --mail-type=end          # send email when job ends\n",
 "#SBATCH --mail-type=fail         # send email if job fails\n",
-"#SBATCH --mail-user=shrivats@princeton.edu\n",
+"#SBATCH --mail-user=ereese@princeton.edu\n",
 "module purge\n",
 "module load anaconda3/2020.11\n",
 "module load gurobi\n",
@@ -118,10 +118,10 @@ preface = ["#!/bin/bash\n",
 "cd "+ path + "\n", "\n",
 "arg=()\n"]
 
-file = open("parallel_drop_della_arvind.slurm", "w")
+file = open("parallel_drop_della_ethan.slurm", "w")
 file.writelines(preface)
 
-for asset in assets_arvind:
+for asset in assets_ethan:
         file.write("arg+=(" + asset + ")\n")
 
 file.write("srun -N 1 -n 1 python parallel_drop.py  ${arg[$SLURM_ARRAY_TASK_ID]}")

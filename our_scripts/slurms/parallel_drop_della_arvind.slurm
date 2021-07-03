@@ -14,7 +14,7 @@ module purge
 module load anaconda3/2020.11
 module load gurobi
 conda activate prescient_env
-cd /scratch/gpfs/ereese/run_dropped/Prescient/our_scripts/parallel_versions
+cd /scratch/gpfs/as1862/run_dropped/Prescient/our_scripts/parallel_versions
 
 arg=()
 arg+=(./timeseries_data_files/101_PV_1_forecasts_actuals.csv)
