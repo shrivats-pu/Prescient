@@ -23,9 +23,9 @@ def output_summary(compilation_prefix = "scen"):
         dictionary = {}
         for dir in all_files:
                 if (dir.startswith(compilation_prefix) and os.path.exists("./"+dir+"/output/overall_simulation_output.csv")):
-                        dictionary.setdefault(dir[1:-3], [])
+                        dictionary.setdefault(dir[0:-3], [])
                         output_data = pd.read_csv("./"+dir+"/output/overall_simulation_output.csv")
-                        dictionary[dir[1:-3]].append(output_data)
+                        dictionary[dir[0:-3]].append(output_data)
         os.chdir("..")
         os.chdir("./our_scripts/collated_outputs")
         table = pd.read_csv('./all_stochastic_test.csv')
