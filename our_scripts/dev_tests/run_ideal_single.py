@@ -1,5 +1,5 @@
 # run_ideal_single.py: run scenarios where all assets except for one are deterministic. For testing purposes
-# intended system: local
+# intended system: Tiger
 # author: Ethan Reese
 # email: ereese@princeton.edu
 # Created: June 16, 2021
@@ -21,7 +21,7 @@ def run(i):
         rh.copy_directory(i, path_template)
         os.chdir(path_template+'%03d'%i)
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, deterministic_assets=deterministic_assets)
-        rh.run_prescient(i, False)
+        rh.run_prescient(i, True)
         os.chdir("..")
 
 # program body

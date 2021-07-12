@@ -58,4 +58,5 @@ def output_summary(compilation_prefix = "scen"):
                         dct['CVaR ' + str(i) + ' Differential'].append(CVaR(output['Total costs'], i) - CVaR(baseline, i))
                 df = pd.DataFrame(dct)
 
+                print("test")
                 df.to_csv("./summary.csv")
