@@ -1,0 +1,7 @@
+command/exec populator.py
+--start-date 2018-07-10
+--end-date 2018-07-11
+--sources-file sources_with_network.txt
+--output-directory deterministic_with_network_scenarios
+--scenario-creator-options-file deterministic_scenario_creator_with_network.txt
+--traceback

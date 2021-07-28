@@ -18,7 +18,7 @@ module load anaconda3/2020.11
 ```
 5. Enter the Prescient directory to begin configuring the virtual environment.
 ```
-cd Prescient/
+cd Prescient/our_scripts/
 ```
 6. Create and activate an anaconda virtual environment from the .yml file included in the repository:
 ```
@@ -27,6 +27,7 @@ conda activate prescient_env
 ```
 7. Now, navigate back to the Egret directory and install the relevant libraries:
 ```
+cd ..
 cd ..
 cd Egret/
 pip install -e .
@@ -38,21 +39,19 @@ module load gurobi/9.0.1
 
 9. Test the Egret Installation by navigating to testing folder and running the Python Scripts:
 ```
-cd examples/unit_committment/
+cd examples/unit_commitment/
 python uc_test_example.py
 ```
 It should give the objective score of 490825.69978187. If you're using a solver other than Gurobi it is possible that the score might differ.
 
 10. Navigate back to the Prescient folder to complete install of those libraries
 ```
-cd ..
-cd ..
-cd ..
+cd ../../..
 cd Prescient/
 ```
 11. Confirm there is a file named `setup.py` in this directory using `ls`. Run:
 ```
-        python setup.py develop
+python setup.py develop
 ```
 12. Move to `our_scripts` directory to install our helper library:
 ```
@@ -63,7 +62,7 @@ python setup.py install
 ```
 cd ..
 cd prescient/downloaders
-python rts-gmlc.py
+python rts_gmlc.py
 ```
 This should take a few minutes but will install the relevant data set. There will be warnings that appear like errors but there should be no true errors.
 

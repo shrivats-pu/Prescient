@@ -1,0 +1,19 @@
+command/exec simulator.py
+--data-directory=deterministic_with_network_scenarios
+--simulate-out-of-sample 
+--run-sced-with-persistent-forecast-errors 
+--output-directory=deterministic_with_network_simulation_output
+--start-date=07-10-2018
+--num-days=1 
+--sced-horizon=4
+--traceback 
+--output-sced-initial-conditions 
+--output-sced-demands 
+--output-ruc-initial-conditions 
+--output-ruc-solutions 
+--output-solver-logs
+--ruc-mipgap=0.01 
+--symbolic-solver-labels 
+--reserve-factor=0.0 
+--deterministic-ruc-solver=cbc
+--sced-solver=cbc

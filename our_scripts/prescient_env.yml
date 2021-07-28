@@ -82,7 +82,6 @@ dependencies:
     - pillow==8.2.0
     - pluggy==0.13.1
     - ply==3.11
-    - prescient-helpers==0.1
     - prometheus-client==0.10.1
     - prompt-toolkit==3.0.18
     - ptyprocess==0.7.0

@@ -1,0 +1,10 @@
+numpy
+matplotlib
+pandas
+scipy
+pyomo>=5.7.1
+pyutilib
+python-dateutil
+networkx
+jupyter
+gridx-egret@ git+https://github.com/grid-parity-exchange/Egret.git
