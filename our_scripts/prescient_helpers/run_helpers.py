@@ -14,7 +14,7 @@ import time
 
 # variables to adjust:
 directory_out = "--output-directory=output"
-dir_path = "./rts_gmlc"
+dir_path = "./texas-7k"
 path_template = "./scenario_"
 
 # all file paths
@@ -274,7 +274,7 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         
         runner.run(populate)
         runner.run(simulate)
-        shutil.rmtree("./RTS-GMLC")
+        #shutil.rmtree("./")
         shutil.rmtree("./deterministic_with_network_scenarios")
         shutil.rmtree("./timeseries_data_files")
         shutil.rmtree("./templates")
