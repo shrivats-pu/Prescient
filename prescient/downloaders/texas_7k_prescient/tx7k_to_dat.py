@@ -219,7 +219,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     
     print("set ThermalGenerators := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "PUR (Purchased Steam)":
             print("%s" % gen_id, file=dat_file)
     print(";", file=dat_file)
     
@@ -228,7 +228,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     if copper_sheet:
         print("set ThermalGeneratorsAtBus[CopperSheet] := ", file=dat_file)
         for gen_id, gen_spec in generator_dict.items():
-            if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+            if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "PUR (Purchased Steam)":
                 print("%s" % gen_id, file=dat_file)
         print(";", file=dat_file)
         print("", file=dat_file)
@@ -237,14 +237,14 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
             print("set ThermalGeneratorsAtBus[%s] := " % bus_name, file=dat_file)
             for gen_id, gen_spec in generator_dict.items():
                 if bus_dict[bus_name].ID == gen_spec.Bus:
-                    if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+                    if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "PUR (Purchased Steam)":
                         print("%s" % gen_id, file=dat_file)
             print(";", file=dat_file)
             print("", file=dat_file)
     
     print("set NondispatchableGenerators := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Solar" or gen_spec.Fuel == "Wind" or gen_spec.Fuel == "Hydro":
+        if gen_spec.Fuel == "SUN (Solar)" or gen_spec.Fuel == "WND (Wind)" or gen_spec.Fuel == "WAT (Water)":
             print("%s" % gen_id, file=dat_file)
     print(";", file=dat_file)
     
@@ -253,7 +253,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     if copper_sheet:
         print("set NondispatchableGeneratorsAtBus[CopperSheet] := ", file=dat_file)
         for gen_id, gen_spec in generator_dict.items():
-            if gen_spec.Fuel == "Solar" or gen_spec.Fuel == "Wind" or gen_spec.Fuel == "Hydro":
+            if gen_spec.Fuel == "SUN (Solar)" or gen_spec.Fuel == "WND (Wind)" or gen_spec.Fuel == "WAT (Water)":
                 print("%s" % gen_id, file=dat_file)
         print(";", file=dat_file)
         print("", file=dat_file)
@@ -262,14 +262,14 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
             print("set NondispatchableGeneratorsAtBus[%s] := " % bus_name, file=dat_file)
             for gen_id, gen_spec in generator_dict.items():
                 if bus_dict[bus_name].ID == gen_spec.Bus:
-                    if gen_spec.Fuel == "Solar" or gen_spec.Fuel == "Wind" or gen_spec.Fuel == "Hydro":
+                    if gen_spec.Fuel == "SUN (Solar)" or gen_spec.Fuel == "WND (Wind)" or gen_spec.Fuel == "WAT (Water)":
                         print("%s" % gen_id, file=dat_file)
             print(";", file=dat_file)
             print("", file=dat_file)
     
     print("param MustRun := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "NUC (Nuclear)":
             print("%s 1" % gen_id, file=dat_file)
     print(";", file=dat_file)
     
@@ -277,14 +277,17 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     
     print("param ThermalGeneratorType := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "NUC (Nuclear)":
             print("%s N" % gen_id, file=dat_file)
-        elif gen_spec.Fuel == "NG":
+        elif gen_spec.Fuel == "NG (Natural Gas)":
             print("%s G" % gen_id, file=dat_file)
-        elif gen_spec.Fuel == "Oil":
+        elif gen_spec.Fuel == "LIG (Lignite Coal)":
             print("%s O" % gen_id, file=dat_file)
-        elif gen_spec.Fuel == "Coal":
+        elif gen_spec.Fuel == "SUB (Subbituminous Coal)":
             print("%s C" % gen_id, file=dat_file)
+        # I don't get how this works but I assume it has to output something - ER
+        elif gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "PUR (Purchased Steam)":
+            print("%s A" % gen_id, file=dat_file)
         else:
             pass
     print(";", file=dat_file)
@@ -293,11 +296,11 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     
     print("param NondispatchableGeneratorType := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Wind":
+        if gen_spec.Fuel == "WND (Wind)":
             print("%s W" % gen_id, file=dat_file)
-        elif gen_spec.Fuel == "Solar":
+        elif gen_spec.Fuel == "SUN (Solar)":
             print("%s S" % gen_id, file=dat_file)
-        elif gen_spec.Fuel == "Hydro":
+        elif gen_spec.Fuel == "WAT (Water)":
             print("%s H" % gen_id, file=dat_file)
         else:
             pass
@@ -307,7 +310,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     
     print("param: MinimumPowerOutput MaximumPowerOutput MinimumUpTime MinimumDownTime NominalRampUpLimit NominalRampDownLimit StartupRampLimit ShutdownRampLimit := ", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "PUR (Purchased Steam)":
             print("%15s %10.2f %10.2f %2d %2d %10.2f %10.2f %10.2f %10.2f" % (gen_id, 
                                                                               gen_spec.MinPower,
                                                                               gen_spec.MaxPower,
@@ -323,7 +326,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     print("", file=dat_file)
     
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "PUR (Purchased Steam)":
             if (gen_spec.StartTimeCold <= gen_spec.MinDownTime) or \
                 (gen_spec.StartTimeCold == gen_spec.StartTimeWarm == gen_spec.StartTimeHot): ## in this case, only one startup cost
                 print("set StartupLags[%s] := %d ;" % (gen_id, gen_spec.MinDownTime), file=dat_file)
@@ -338,7 +341,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     print("", file=dat_file)
     
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Oil" or gen_spec.Fuel == "Coal" or gen_spec.Fuel == "NG" or gen_spec.Fuel == "Nuclear":
+        if gen_spec.Fuel == "LIG (Lignite Coal)" or gen_spec.Fuel == "SUB (Subbituminous Coal)" or gen_spec.Fuel == "NG (Natural Gas)" or gen_spec.Fuel == "NUC (Nuclear)" or gen_spec.Fuel == "WDS (Wood/Wood Waste Solids)" or gen_spec.Fuel == "WH (Waste Heat)" or gen_spec.Fuel == "PUR (Purchased Steam)":
             # round the power points to the nearest 10kW
             # IMPT: These quantities are MW
             x0 = round(gen_spec.OutputPct0 * gen_spec.MaxPower,1)
@@ -355,7 +358,7 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
             y2 = gen_spec.FuelPrice * (((x2-x1) * (gen_spec.HeatRateIncr2 * 1000.0 / 1000000.0))) + y1
             y3 = gen_spec.FuelPrice * (((x3-x2) * (gen_spec.HeatRateIncr3 * 1000.0 / 1000000.0))) + y2
 
-            ## for the nuclear unit
+            ## for the NUC (Nuclear) unit
             if y0 == y3:
                 ## PRESCIENT currently doesn't gracefully handle generators with zero marginal cost
                 print("set CostPiecewisePoints[%s] := %12.1f %12.1f ;" % (gen_id, x0, x3),
@@ -372,7 +375,8 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
     
     print("param: UnitOnT0State PowerGeneratedT0 :=", file=dat_file)
     for gen_id, gen_spec in generator_dict.items():
-        if gen_spec.Fuel == "Sync_Cond" or gen_spec.Fuel == "Hydro" or gen_spec.Fuel == "Wind" or gen_spec.Fuel == "Solar":
+        # T7k seems to treat WAT (Water) as a dispatchable asset -> Unclear if that makes this not work -ER
+        if gen_spec.Fuel == "Sync_Cond" or gen_spec.Fuel == "WAT (Water)" or gen_spec.Fuel == "WND (Wind)" or gen_spec.Fuel == "SUN (Solar)":
             continue
         if gen_id not in unit_on_t0_state_dict:
             print("***WARNING - No T0 initial condition found for generator=%s" % gen_id)
