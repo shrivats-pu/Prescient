@@ -14,7 +14,7 @@ runs = 1
 
 def run(i):
         rh.copy_directory(i, path_template)
-        os.chdir(path_template+str(i))
+        os.chdir(path_template+'%03d'%i)
         #rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path)
         rh.run_prescient(i, True)
         os.chdir("..")
