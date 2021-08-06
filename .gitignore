@@ -27,3 +27,15 @@ our_scripts/prescient_helpers.egg-info/SOURCES.txt
 our_scripts/slurms/parallel_ideal_1.slurm
 our_scripts/slurms/parallel_ideal_2.slurm
 our_scripts/slurms/collated_nario_ideal_213_RTPV_.csv
+our_scripts/dev_tests/error.txt
+our_scripts/dev_tests/#error.txt#
+our_scripts/dev_tests/errors.txt
+our_scripts/dev_tests/gridx_prescient.egg-info/dependency_links.txt
+our_scripts/dev_tests/gridx_prescient.egg-info/entry_points.txt
+our_scripts/dev_tests/gridx_prescient.egg-info/PKG-INFO
+our_scripts/dev_tests/gridx_prescient.egg-info/requires.txt
+our_scripts/dev_tests/gridx_prescient.egg-info/SOURCES.txt
+our_scripts/dev_tests/gridx_prescient.egg-info/top_level.txt
+.gitignore
+.gitignore
+gridx_prescient.egg-info/SOURCES.txt

@@ -268,16 +268,17 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         with open(populate, "w") as file:
                 for line in lines:
                         if (line.startswith("--end-date")):
-                                file.write("--end-date 2020-07-11 \n")
+                                #file.write("--end-date 2020-07-11 \n")
+                                file.write(line)
                         else:
                                 file.write(line)
         
         runner.run(populate)
         runner.run(simulate)
         #shutil.rmtree("./")
-        shutil.rmtree("./deterministic_with_network_scenarios")
-        shutil.rmtree("./timeseries_data_files")
-        shutil.rmtree("./templates")
+        #shutil.rmtree("./deterministic_with_network_scenarios")
+        #shutil.rmtree("./timeseries_data_files")
+        #shutil.rmtree("./templates")
 
 
 def modify_file(path):
