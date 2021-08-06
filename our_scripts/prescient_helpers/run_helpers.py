@@ -268,8 +268,7 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         with open(populate, "w") as file:
                 for line in lines:
                         if (line.startswith("--end-date")):
-                                #file.write("--end-date 2020-07-11 \n")
-                                file.write(line)
+                                file.write("--end-date 2018-07-11 \n")
                         else:
                                 file.write(line)
         
