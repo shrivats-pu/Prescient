@@ -14,7 +14,7 @@ import time
 
 # variables to adjust:
 directory_out = "--output-directory=output"
-dir_path = "./texas-7k"
+#dir_path = "./texas-7k"
 path_template = "./scenario_"
 
 # all file paths
@@ -245,7 +245,7 @@ def save_quotients(file_paths, solar_path, no_solar_path):
 	no_solar_data_1.to_csv(no_solar_path, index=False)
 
 # should start and finish in current working directory
-def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt'):
+def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt', end_date = "2018-07-11"):
         with open(simulate, "r") as file:
                 lines = file.readlines()
         with open(simulate, "w") as file:
@@ -268,7 +268,7 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         with open(populate, "w") as file:
                 for line in lines:
                         if (line.startswith("--end-date")):
-                                file.write("--end-date 2018-07-11 \n")
+                                file.write("--end-date " + end_date + "\n")
                         else:
                                 file.write(line)
         
@@ -287,7 +287,7 @@ def modify_file(path):
     data.to_csv(path, index=False)
 
 
-def copy_directory(index, path_template):
+def copy_directory(index, path_template, dir_path="./texas_7k"):
     new_path = path_template + '%03d'%index
     if os.path.exists(new_path):
         shutil.rmtree(new_path)
