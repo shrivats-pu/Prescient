@@ -287,7 +287,7 @@ def modify_file(path):
     data.to_csv(path, index=False)
 
 
-def copy_directory(index, path_template, dir_path="./texas_7k"):
+def copy_directory(index, path_template, dir_path="./texas-7k"):
     new_path = path_template + '%03d'%index
     if os.path.exists(new_path):
         shutil.rmtree(new_path)
