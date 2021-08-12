@@ -15,10 +15,15 @@ no_solar_path = "./no_solar_quotients.csv"
 runs = 1
 
 deterministic_assets = [sys.argv[1]]
+rts_or_7k = sys.argv[2]
 print(deterministic_assets)
+print(rts_or_7k)
 
 def run(i):
-        rh.copy_directory(i, path_template)
+        if rts_or_7k == 'RTS':
+                rh.copy_directory(i, path_template, "./rts_gmlc")
+        else:
+                rh.copy_directory(i, path_template)
         os.chdir(path_template+'%03d'%i)
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, deterministic_assets=deterministic_assets)
         rh.run_prescient(i, True)
