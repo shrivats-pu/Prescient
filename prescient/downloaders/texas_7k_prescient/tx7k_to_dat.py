@@ -365,6 +365,8 @@ def write_template(dir, file_name, copper_sheet = False, reserve_factor = None )
             ## for the NUC (Nuclear) unit
             #if (gen_spec.Fuel == "NUC (Nuclear)"):
             ## PRESCIENT currently doesn't gracefully handle generators with zero marginal cost
+            # only printing (x0, y0) and (x3, y3) so there are only two points - prevents rounding errors
+            # from making this non-linear
             print("set CostPiecewisePoints[%s] := %12.1f %12.1f ;" % (gen_id, x0, x3),
                     file=dat_file)
             print("set CostPiecewiseValues[%s] := %12.2f %12.2f ;" % (gen_id, y0, y3+0.01),

@@ -5,11 +5,16 @@
 
 import os
 import prescient_helpers.run_helpers as rh
+import sys
 
 path_template = "./scenario_"
 solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
 runs = 1
+
+start_date = sys.argv[1]
+end_date = sys.argv[2]
+ndays = sys.argv[3]
 
 
 def run(i):

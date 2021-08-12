@@ -245,15 +245,19 @@ def save_quotients(file_paths, solar_path, no_solar_path):
 	no_solar_data_1.to_csv(no_solar_path, index=False)
 
 # should start and finish in current working directory
-def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt', end_date = "2018-07-11"):
+def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt',
+                  start_date = "2018-07-10", end_date = "2018-07-11", ndays=1):
         with open(simulate, "r") as file:
                 lines = file.readlines()
         with open(simulate, "w") as file:
                 for line in lines:
                         if (line.startswith("--output-directory=")):
                                 file.write(directory_out + "\n")
+                        elif (line.startswith("--start-date")):
+                                start_date_formatted = start_date[5:]+"-"+start_date[0:5]
+                                file.write("--start-date="+start_date_formatted + "\n")
                         elif (line.startswith("--num-days")):
-                                file.write("--num-days=1 \n")
+                                file.write("--num-days=" + str(ndays) + " \n")
                         elif (line.startswith("--random-seed") or line.startswith("--output-sced-solutions") or line.startswith(
                         "--output-ruc-dispatches")):
                                 continue
@@ -269,6 +273,8 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
                 for line in lines:
                         if (line.startswith("--end-date")):
                                 file.write("--end-date " + end_date + "\n")
+                        elif (line.startswith("--start-date")):
+                                    file.write("--end-date " + start_date + "\n")
                         else:
                                 file.write(line)
         
