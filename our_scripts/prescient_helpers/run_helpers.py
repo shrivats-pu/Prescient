@@ -254,7 +254,7 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
                         if (line.startswith("--output-directory=")):
                                 file.write(directory_out + "\n")
                         elif (line.startswith("--start-date")):
-                                start_date_formatted = start_date[5:]+"-"+start_date[0:4]
+                                start_date_formatted = start_date[5:]+ "-"+start_date[0:4]
                                 file.write("--start-date="+start_date_formatted + "\n")
                         elif (line.startswith("--num-days")):
                                 file.write("--num-days=" + str(ndays) + " \n")
