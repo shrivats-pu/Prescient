@@ -70,7 +70,7 @@ This should take a few minutes but will install the relevant data set. There wil
 2. Test out the installation by running a single run:
 ```
 cd ../../our_scripts/dev_tests
-python run_ideal_single.py
+python run_all_Tiger_rts.py
 ```
 This should run without errors. Again, there may be warnings from Prescient that appear to be errors.
 
@@ -106,7 +106,7 @@ python texas_7k.py
 3. Add the two following lines to the slurm file to move to our scripts directory and run our script that intiates Prescient:
 ```
 cd ../../our_scripts/run_scripts
-python run_all_tiger.py
+python run_all_tiger.py $startdate$ $enddate$ $ndays$
 ```
 
 4. Now close and save the file and enter the following command in the command line:
