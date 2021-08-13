@@ -12,16 +12,16 @@ solar_path = "./solar_quotients.csv"
 no_solar_path = "./no_solar_quotients.csv"
 runs = 1
 
-start_date = sys.argv[1]
-end_date = sys.argv[2]
-ndays = sys.argv[3]
+sd = sys.argv[1]
+ed = sys.argv[2]
+days = sys.argv[3]
 
 
 def run(i):
         rh.copy_directory(i, path_template)
         os.chdir(path_template+'%03d'%i)
         #rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path)
-        rh.run_prescient(i, True, start_date=start_date, end_date=end_date, ndays=ndays)
+        rh.run_prescient(i, True, start_date=sd, end_date=ed, ndays=days)
         os.chdir("..")
 
 

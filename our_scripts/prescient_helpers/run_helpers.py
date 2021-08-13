@@ -245,8 +245,7 @@ def save_quotients(file_paths, solar_path, no_solar_path):
 	no_solar_data_1.to_csv(no_solar_path, index=False)
 
 # should start and finish in current working directory
-def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt',
-                  start_date = "2018-07-10", end_date = "2018-07-11", ndays=1):
+def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt', start_date = "2018-07-10", end_date = "2018-07-11", ndays=1):
         with open(simulate, "r") as file:
                 lines = file.readlines()
         with open(simulate, "w") as file:
