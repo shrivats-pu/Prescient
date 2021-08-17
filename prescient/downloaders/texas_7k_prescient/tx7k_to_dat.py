@@ -7,7 +7,7 @@
 #  This software is distributed under the Revised BSD License.
 #  ___________________________________________________________________________
 
-#tx7k_to_dat.py: Try to make rts_to_dat.py more general
+# tx7k_to_dat.py: Try to make rts_to_dat.py more general
 # Author: Ethan Reese
 # Email: ereese@princeton.edu
 # Date: July 27, 2021
