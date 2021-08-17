@@ -200,7 +200,7 @@ def source_contribution_factors(source, zone_numbers, by_zone=True):
         for zone in zone_numbers:
             zone_data = pd.DataFrame()
             for site in site_list:
-                idx = gen_data[gen_data['GEN UID'] == site].index[0]
+                idx = gen_data[gen_data['GEN UID']==site].index[0]
                 bus_id_for_site = gen_data.iloc[idx]['Bus ID']
                 area_for_bus_id = bus_data[bus_data['Bus ID'] == bus_id_for_site]['Area'].iloc[0]
                 if area_for_bus_id == zone:
