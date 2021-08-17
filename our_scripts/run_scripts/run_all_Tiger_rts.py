@@ -16,7 +16,7 @@ def run(i):
         rh.copy_directory(i, path_template, dir_path="./rts_gmlc")
         os.chdir(path_template+'%03d'%i)
         #rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path)
-        rh.run_prescient(i, True, start_date="2020-07-10", end_date="2020-07-11")
+        rh.run_prescient(i, False, start_date="2020-07-10", end_date="2020-07-16", ndays=6)
         os.chdir("..")
 
 

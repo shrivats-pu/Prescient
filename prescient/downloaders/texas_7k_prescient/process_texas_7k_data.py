@@ -19,8 +19,9 @@ import pandas as pd
 import numpy as np
 import glob
 
-tx_zones = ["Coast", "East", "Far_West", "North", "North_Central", "South_Central", 
-"Southern", "West"]
+# hard coded the zones here
+tx_zones = ["Coast", "East", "Far_West", "North", "North_Central", "South_Central",
+            "South", "West"]
 
 def gmlc_to_prescient(source, aggregate=False, forecast_error=False):
     """
@@ -32,7 +33,7 @@ def gmlc_to_prescient(source, aggregate=False, forecast_error=False):
     """
     # Find the files you want, forecast and actual:
     data_folder = os.path.join(path,source)
-    print (data_folder)
+    print(data_folder)
     forecast_file = glob.glob(os.path.join(data_folder,'DAY_AHEAD*'))[0]
     actual_file = glob.glob(os.path.join(data_folder,'REAL_TIME*'))[0]
     # Read in forecast data, identify site names, collect datetime
@@ -80,9 +81,10 @@ def gmlc_to_prescient_by_zone(source, zone_numbers = [1,2,3], forecast_error=Fal
     """
     # Find the files you want, forecast and actual:
     data_folder = os.path.join(path,source)
-    print(data_folder)
     forecast_file = glob.glob(os.path.join(data_folder,'DAY_AHEAD*'))[0]
     actual_file = glob.glob(os.path.join(data_folder,'REAL_TIME*'))[0]
+    bus_data = pd.read_csv(source_path+"/bus.csv")
+    gen_data = pd.read_csv(source_path+"/gen.csv")
     # Read in forecast data, identify site names, collect datetime
     forecast = pd.read_csv(forecast_file)
     site_list = forecast.columns.values.tolist()[4:forecast.shape[1]]
@@ -101,13 +103,22 @@ def gmlc_to_prescient_by_zone(source, zone_numbers = [1,2,3], forecast_error=Fal
         actual = pd.read_csv(actual_file)
     else:
         actual = forecast.copy()
+
     for zone in zone_numbers:
         zone_acts = pd.DataFrame()
         zone_fore = pd.DataFrame()
         for site in site_list:
-            if site == zone:
-                zone_acts[site] = actual[site]
-                zone_fore[site] = forecast[site]
+            if source != 'Load':
+                idx = gen_data[gen_data['GEN UID'] == site].index[0]
+                bus_id_for_site = gen_data.iloc[idx]['Bus ID']
+                area_for_bus_id = bus_data[bus_data['Bus ID'] == bus_id_for_site]['Area'].iloc[0]
+                if area_for_bus_id == zone:
+                    zone_acts[site] = actual[site]
+                    zone_fore[site] = forecast[site]
+            else:
+                if site == zone:
+                    zone_acts[site] = actual[site]
+                    zone_fore[site] = forecast[site]
         if zone_acts.shape[1] >= 1:
             agg_acts = zone_acts.sum(axis=1)
             agg_fore = zone_fore.sum(axis=1)
@@ -152,7 +163,6 @@ def load_by_bus(source, zone_numbers = [1,2,3], forecast_error=True):
         actual = pd.read_csv(actual_file) 
     else:
         actual = forecast.copy()
-
     for zone in zone_numbers:
         # Get list of bus ID's in each zone
         idx_area = np.where(bus_data['Area'] == zone)[0]
@@ -183,13 +193,17 @@ def source_contribution_factors(source, zone_numbers, by_zone=True):
     actual_file = glob.glob(os.path.join(data_folder,'REAL_TIME*'))[0]
     actual_raw = pd.read_csv(actual_file)
     site_list = actual_raw.columns.values.tolist()[4:actual_raw.shape[1]]
+    bus_data = pd.read_csv(source_path+"/bus.csv")
+    gen_data = pd.read_csv(source_path+"/gen.csv")
 
     if by_zone == True:
         for zone in zone_numbers:
             zone_data = pd.DataFrame()
             for site in site_list:
-                site_zone = int(site[0])
-                if site_zone == zone:
+                idx = gen_data[gen_data['GEN UID'] == site].index[0]
+                bus_id_for_site = gen_data.iloc[idx]['Bus ID']
+                area_for_bus_id = bus_data[bus_data['Bus ID'] == bus_id_for_site]['Area'].iloc[0]
+                if area_for_bus_id == zone:
                     zone_data[site] = actual_raw[site]
             if zone_data.shape[1] >= 1:
                 zone_sum = np.sum(zone_data, axis=1)
