@@ -10,7 +10,7 @@ git clone https://github.com/shrivats-pu/Prescient/
 ```
 3. Install a frozen version of Egret from our github repository. The new version of Egret causes unexplained errors so we have saved an old version that is still functional.
 ```
-git clone https://github.com/EthanReese/Egret
+git clone https://github.com/shrivats-pu/Egret
 ```
 4. Activate Anaconda if not done already. On Princeton computing cluster:
 ```
