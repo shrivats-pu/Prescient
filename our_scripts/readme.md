@@ -106,7 +106,7 @@ python texas_7k.py
 3. Add the two following lines to the slurm file to move to our scripts directory and run our script that intiates Prescient:
 ```
 cd ../../our_scripts/run_scripts
-python run_all_tiger.py $startdate$ $enddate$ $ndays$
+python run_all_Tiger.py $startdate$ $enddate$ $ndays$
 ```
 
 4. Now close and save the file and enter the following command in the command line:
