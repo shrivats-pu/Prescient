@@ -69,7 +69,7 @@ This should take a few minutes but will install the relevant data set. There wil
 
 2. Test out the installation by running a single run:
 ```
-cd ../../our_scripts/dev_tests
+cd ../../our_scripts/run_scripts
 python run_all_Tiger_rts.py
 ```
 This should run without errors. Again, there may be warnings from Prescient that appear to be errors.
