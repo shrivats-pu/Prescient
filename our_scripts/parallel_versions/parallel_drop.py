@@ -17,7 +17,7 @@ dropped_asset = [sys.argv[1]]
 path_template = "./scenario_dropped_" + dropped_asset[0][24:-21]
 
 def run(i):
-        rh.copy_directory(i, path_template)
+        rh.copy_directory(i, path_template, dir_path="./rts_gmlc")
         os.chdir(path_template+'%03d'%i)
         rh.perturb_data(rh.file_paths_combined, solar_path, no_solar_path, dropped_assets=dropped_asset)
         rh.run_prescient(i, True)

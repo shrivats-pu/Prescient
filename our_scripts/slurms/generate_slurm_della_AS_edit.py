@@ -4,7 +4,7 @@
 # July 2, 2021
 import math
 
-path = "/scratch/gpfs/ereese/run_dropped/Prescient/our_scripts/parallel_versions"
+path = "/scratch/gpfs/as1862/Della_RTS_Drop/Prescient/our_scripts/parallel_versions"
 
 assets_all = ['./timeseries_data_files/101_PV_1_forecasts_actuals.csv',
              './timeseries_data_files/101_PV_2_forecasts_actuals.csv', './timeseries_data_files/101_PV_3_forecasts_actuals.csv',
@@ -118,10 +118,10 @@ preface = ["#!/bin/bash\n",
 "cd "+ path + "\n", "\n",
 "arg=()\n"]
 
-file = open("parallel_drop_della_ethan.slurm", "w")
+file = open("parallel_drop_della_all.slurm", "w")
 file.writelines(preface)
 
-for asset in assets_ethan:
+for asset in assets_all:
         file.write("arg+=(" + asset + ")\n")
 
 file.write("srun -N 1 -n 1 python parallel_drop.py  ${arg[$SLURM_ARRAY_TASK_ID]}")

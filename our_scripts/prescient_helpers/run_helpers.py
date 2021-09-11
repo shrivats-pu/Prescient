@@ -245,7 +245,9 @@ def save_quotients(file_paths, solar_path, no_solar_path):
 	no_solar_data_1.to_csv(no_solar_path, index=False)
 
 # should start and finish in current working directory
-def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt', start_date = "2018-07-10", end_date = "2018-07-11", ndays=1):
+def run_prescient(index, tiger, populate='populate_with_network_deterministic.txt', simulate='simulate_with_network_deterministic.txt',
+                  start_date = "2020-07-10", end_date = "2020-07-11", ndays=1):
+    # remember to change start dates with rts vs 7k
         with open(simulate, "r") as file:
                 lines = file.readlines()
         with open(simulate, "w") as file:
@@ -279,10 +281,10 @@ def run_prescient(index, tiger, populate='populate_with_network_deterministic.tx
         
         runner.run(populate)
         runner.run(simulate)
-        #shutil.rmtree("./")
-        #shutil.rmtree("./deterministic_with_network_scenarios")
-        #shutil.rmtree("./timeseries_data_files")
-        #shutil.rmtree("./templates")
+        shutil.rmtree("./RTS-GMLC")
+        shutil.rmtree("./deterministic_with_network_scenarios")
+        shutil.rmtree("./timeseries_data_files")
+        shutil.rmtree("./templates")
 
 
 def modify_file(path):
