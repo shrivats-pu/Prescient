@@ -29,7 +29,7 @@ def copy_templates():
 # probably download it in a smoother way in the future
 def download(branch='HEAD'):
     '''
-    Clones Texas-7k data from https://github.com/EthanReese/texas_7k_data
+    Clones Texas-7k data from https://github.com/shrivats-pu/texas_7k_data
     '''
     
     cur_path = os.getcwd()
@@ -42,7 +42,7 @@ def download(branch='HEAD'):
 
     print('Downloading Texas-7k into '+tx_path)
 
-    url = 'https://github.com/EthanReese/texas_7k_data'
+    url = 'https://github.com/shrivats-pu/texas_7k_data'
 
     clone_cmd = 'git clone '+url+' '+tx_path
     ret = os.system(clone_cmd)
